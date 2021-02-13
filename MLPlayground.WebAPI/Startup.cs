@@ -12,6 +12,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
+using MLPlayground.Services.Extensions;
+
 namespace MLPlayground.WebAPI
 {
     public class Startup
@@ -28,6 +30,7 @@ namespace MLPlayground.WebAPI
         {
 
             services.AddControllers();
+            services.RegisterWebApiServices();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MLPlayground.WebAPI", Version = "v1" });
