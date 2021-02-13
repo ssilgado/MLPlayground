@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MLPlayground.WebAPI", "MLPl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MLPlayground.Services", "MLPlayground.Services\MLPlayground.Services.csproj", "{5D7BD482-8ABF-4E44-ACA1-11260871446E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MLPlayground.Models", "MLPlayground.Models\MLPlayground.Models.csproj", "{668A5275-E81F-4732-B1B9-46C8E9FA0FA0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,5 +46,17 @@ Global
 		{5D7BD482-8ABF-4E44-ACA1-11260871446E}.Release|x64.Build.0 = Release|Any CPU
 		{5D7BD482-8ABF-4E44-ACA1-11260871446E}.Release|x86.ActiveCfg = Release|Any CPU
 		{5D7BD482-8ABF-4E44-ACA1-11260871446E}.Release|x86.Build.0 = Release|Any CPU
+		{668A5275-E81F-4732-B1B9-46C8E9FA0FA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{668A5275-E81F-4732-B1B9-46C8E9FA0FA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{668A5275-E81F-4732-B1B9-46C8E9FA0FA0}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{668A5275-E81F-4732-B1B9-46C8E9FA0FA0}.Debug|x64.Build.0 = Debug|Any CPU
+		{668A5275-E81F-4732-B1B9-46C8E9FA0FA0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{668A5275-E81F-4732-B1B9-46C8E9FA0FA0}.Debug|x86.Build.0 = Debug|Any CPU
+		{668A5275-E81F-4732-B1B9-46C8E9FA0FA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{668A5275-E81F-4732-B1B9-46C8E9FA0FA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{668A5275-E81F-4732-B1B9-46C8E9FA0FA0}.Release|x64.ActiveCfg = Release|Any CPU
+		{668A5275-E81F-4732-B1B9-46C8E9FA0FA0}.Release|x64.Build.0 = Release|Any CPU
+		{668A5275-E81F-4732-B1B9-46C8E9FA0FA0}.Release|x86.ActiveCfg = Release|Any CPU
+		{668A5275-E81F-4732-B1B9-46C8E9FA0FA0}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
