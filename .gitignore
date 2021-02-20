@@ -6,6 +6,9 @@
 # System files
 .DS_Store
 
+# Image Files
+*.jpeg
+
 # User-specific files
 *.rsuser
 *.suo
