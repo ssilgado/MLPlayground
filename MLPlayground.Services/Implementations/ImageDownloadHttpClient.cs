@@ -25,7 +25,8 @@ namespace MLPlayground.Services.Implementations
 
                 return new ImageClientResponse()
                 {
-                    Image = responseImage
+                    Image = responseImage,
+                    ResponseSuccessful = true
                 };
             }
             catch(System.Exception e)
@@ -33,7 +34,8 @@ namespace MLPlayground.Services.Implementations
                 Console.Write(e.ToString());
                 return new ImageClientResponse()
                 {
-                    Errors = new string[] {e.ToString()}
+                    Error = e.ToString(),
+                    ResponseSuccessful = false
                 };
             }
         }

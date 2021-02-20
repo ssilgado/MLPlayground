@@ -72,7 +72,7 @@ namespace MLPlayground.Services.Implementations
 
             var imageClientResponse = await _imageDownloadHttpClient.DownloadImage(imageNetData.ImageURL);
 
-            if(imageClientResponse.Errors == null) imageNetData.Image = imageClientResponse.Image;
+            if(imageClientResponse.ResponseSuccessful) imageNetData.Image = imageClientResponse.Image;
             return imageNetData;
         }
     }
