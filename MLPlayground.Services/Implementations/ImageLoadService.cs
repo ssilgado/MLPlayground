@@ -24,21 +24,21 @@ namespace MLPlayground.Services.Implementations
         {
             try
             {
-                var imageNetDataList = parseImageDataFile().ToList();
-                var imageNetDataBatches = imageNetDataList.ChunkBy(10);
+                var imageDownloadDataList = parseImageDataFile().ToList();
+                var imageDownloadDataBatches = imageDownloadDataList.ChunkBy(10);
 
-                foreach(var batch in imageNetDataBatches)
+                foreach(var batch in imageDownloadDataBatches)
                 {
                     var downloadImagesTask = batch.Select(o => GetImages(o));
 
-                    var loadedImageNetDataList = await Task.WhenAll(downloadImagesTask);
+                    var loadedImageDownloadDataList = await Task.WhenAll(downloadImagesTask);
 
-                    var validImageNetDataList = loadedImageNetDataList.Where(o => o.Image != null);
+                    var validImageNetDataList = loadedImageDownloadDataList.Where(o => o.Image != null);
 
-                    foreach(var imageNetData in validImageNetDataList)
+                    foreach(var imageDownloadData in validImageNetDataList)
                     {
-                        var imageSaveLocation = DataFiles.ImagesFolder + $"/{imageNetData.ImageClassification}{imageNetData.ImageId}.jpeg";
-                        imageNetData.Image.Save(imageSaveLocation, ImageFormat.Jpeg);
+                        var imageSaveLocation = DataFiles.ImagesFolder + $"/{imageDownloadData.ImageClassification}{imageDownloadData.ImageId}.jpeg";
+                        imageDownloadData.Image.Save(imageSaveLocation, ImageFormat.Jpeg);
                     }
                 }
 
@@ -66,14 +66,14 @@ namespace MLPlayground.Services.Implementations
             return imageData.Skip(1);
         }
 
-        private async Task<ImageDownloadData> GetImages(ImageDownloadData imageNetData)
+        private async Task<ImageDownloadData> GetImages(ImageDownloadData imageDownloadData)
         {
-            if(String.IsNullOrWhiteSpace(imageNetData.ImageURL)) return imageNetData;
+            if(String.IsNullOrWhiteSpace(imageDownloadData.ImageURL)) return imageDownloadData;
 
-            var imageClientResponse = await _imageDownloadHttpClient.DownloadImage(imageNetData.ImageURL);
+            var imageClientResponse = await _imageDownloadHttpClient.DownloadImage(imageDownloadData.ImageURL);
 
-            if(imageClientResponse.ResponseSuccessful) imageNetData.Image = imageClientResponse.Image;
-            return imageNetData;
+            if(imageClientResponse.ResponseSuccessful) imageDownloadData.Image = imageClientResponse.Image;
+            return imageDownloadData;
         }
     }
 }
