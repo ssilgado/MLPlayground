@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using System.Drawing;
 using System.IO;
+using System;
 
 using MLPlayground.Services.Contracts;
 using MLPlayground.Models.Models;
@@ -29,6 +30,7 @@ namespace MLPlayground.Services.Implementations
             }
             catch(System.Exception e)
             {
+                Console.Write(e.ToString());
                 return new ImageClientResponse()
                 {
                     Errors = new string[] {e.ToString()}

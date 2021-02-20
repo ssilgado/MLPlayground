@@ -11,6 +11,7 @@ namespace MLPlayground.Services.Extensions
         public static IServiceCollection RegisterWebApiServices(this IServiceCollection services)
         {
             services.AddScoped<IImageDownloadHttpClient, ImageDownloadHttpClient>();
+            services.AddScoped<IImageLoadService, ImageLoadService>();
 
             services.AddHttpClient<IImageDownloadHttpClient,ImageDownloadHttpClient>();
             return services;
