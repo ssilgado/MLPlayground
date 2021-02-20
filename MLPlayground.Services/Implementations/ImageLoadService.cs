@@ -52,11 +52,11 @@ namespace MLPlayground.Services.Implementations
             
         }
 
-        private IEnumerable<ImageNetData> parseImageDataFile()
+        private IEnumerable<ImageDownloadData> parseImageDataFile()
         {
             var imageData = File.ReadAllLines(DataFiles.TagsTsv)
             .Select(line => line.Split('\t'))
-            .Select(tokens => new ImageNetData()
+            .Select(tokens => new ImageDownloadData()
             {
                 ImageId = tokens[0],
                 ImageURL = tokens[1],
@@ -66,7 +66,7 @@ namespace MLPlayground.Services.Implementations
             return imageData.Skip(1);
         }
 
-        private async Task<ImageNetData> GetImages(ImageNetData imageNetData)
+        private async Task<ImageDownloadData> GetImages(ImageDownloadData imageNetData)
         {
             if(String.IsNullOrWhiteSpace(imageNetData.ImageURL)) return imageNetData;
 
