@@ -26,21 +26,41 @@ namespace MLPlayground.Services.Implementations
             {
                 var imageDownloadDataList = parseImageDataFile().ToList();
                 var imageDownloadDataBatches = imageDownloadDataList.ChunkBy(10);
+                var imageManifest = new List<ImageTrainingData>();
 
                 foreach(var batch in imageDownloadDataBatches)
                 {
-                    var downloadImagesTask = batch.Select(o => GetImages(o));
+                    var downloadImagesTask = batch.Select(o =>
+                    {
+                        if(!o.ImageAlreadyDownloaded) return GetImages(o);
+                        return Task.FromResult(o);
+                    });
 
                     var loadedImageDownloadDataList = await Task.WhenAll(downloadImagesTask);
 
                     var validImageNetDataList = loadedImageDownloadDataList.Where(o => o.Image != null);
+                    var preExistingImages = loadedImageDownloadDataList.Where(o => o.ImageAlreadyDownloaded);
 
                     foreach(var imageDownloadData in validImageNetDataList)
                     {
                         var imageSaveLocation = DataFiles.ImagesFolder + $"/{imageDownloadData.ImageClassification}{imageDownloadData.ImageId}.jpeg";
                         imageDownloadData.Image.Save(imageSaveLocation, ImageFormat.Jpeg);
+                        imageDownloadData.Image.Dispose();
+                        imageManifest.Add(new ImageTrainingData()
+                        {
+                            ImageName = $"{imageDownloadData.ImageClassification}{imageDownloadData.ImageId}",
+                            ImageClassification = imageDownloadData.ImageClassification
+                        });
                     }
+
+                    imageManifest.AddRange(preExistingImages.Select(o => new ImageTrainingData(){
+                        ImageName = $"{o.ImageClassification}{o.ImageId}",
+                        ImageClassification = o.ImageClassification
+                    }));
+
                 }
+
+                await GenerateImageManifest(imageManifest);
 
                 return true;
             }
@@ -74,6 +94,11 @@ namespace MLPlayground.Services.Implementations
 
             if(imageClientResponse.ResponseSuccessful) imageDownloadData.Image = imageClientResponse.Image;
             return imageDownloadData;
+        }
+
+        private async Task GenerateImageManifest(IEnumerable<ImageTrainingData> imageTrainingDatas)
+        {
+            await File.WriteAllLinesAsync(Path.Combine(DataFiles.ImagesFolder, $"ImageManifest.tsv"), imageTrainingDatas.Select(o => $"{o.ImageName}\t{o.ImageClassification}"));
         }
     }
 }
