@@ -4,13 +4,6 @@
     "parameters": {
         "environment": {
             "value": "dev" 
-        },
-        "sqlAdminUser": {
-            "value": ""
-        },
-        "sqlAdminPassword": {
-            "value": ""
-        }
-        
+        }       
     }
 }
