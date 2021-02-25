@@ -6,8 +6,9 @@
 # System files
 .DS_Store
 
-# Image Files
+# Image Files And Data Files
 *.jpeg
+ImageManifest.tsv
 
 # User-specific files
 *.rsuser

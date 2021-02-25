@@ -74,7 +74,7 @@ namespace MLPlayground.Services.Implementations
 
         private IEnumerable<ImageDownloadData> parseImageDataFile()
         {
-            var imageData = File.ReadAllLines(DataFiles.TagsTsv)
+            var imageData = File.ReadAllLines(DataFiles.ImageDataSourceTsv)
             .Select(line => line.Split('\t'))
             .Select(tokens => new ImageDownloadData()
             {
