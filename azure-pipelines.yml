@@ -13,8 +13,18 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+# Copy AzureDeploy Files To StagingDirectory
+- task: CopyFiles@2
+  inputs:
+    Contents: '**\MLPlayground.AzureDeploy\**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
+    projects: '**/*.csproj'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'publish'
+    publishWebProjects: false
     projects: '**/*.csproj'
 
