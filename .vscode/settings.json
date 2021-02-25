@@ -1,5 +1,7 @@
 {
     "files.exclude": {
-        "**/*.jpeg": true
+        "**/*.jpeg": true,
+        "**/obj/": true,
+        "**/bin/": true
     }
 }
