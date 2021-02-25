@@ -12,10 +12,6 @@
                 "description": "The parameter environment."
             }
         },
-        "resourceGroupLocation": {
-            "type": "string",
-            "defaultValue": "centralus"
-        },
         "sqlAdminUser": {
             "type": "string"
         },
@@ -30,13 +26,6 @@
         "resourceGroupName": "[concat('rg-',variables('projectName'),'-',parameters('environment'))]"
     },
     "resources": [
-        {
-            "type": "Microsoft.Resources/resourceGroups",
-            "apiVersion": "2020-06-01",
-            "name": "[parameters('resourceGroupLocation')]",
-            "location": "[parameters('resourceGroupLocation')]",
-            "properties": {}
-        },
         {
             "name": "[variables('sqlservername')]",
             "type": "Microsoft.Sql/servers",
