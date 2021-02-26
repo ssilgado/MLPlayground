@@ -35,7 +35,6 @@
                 "displayName": "[variables('sqlservername')]"
             },
             "dependsOn": [
-                "[resourceId('Microsoft.Resources/resourceGroups', variables('resourceGroupName'))]"
             ],
             "properties": {
                 "administratorLogin": "[parameters('sqlAdminUser')]",
