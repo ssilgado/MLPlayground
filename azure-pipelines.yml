@@ -16,12 +16,13 @@ steps:
 # Copy AzureDeploy Files To StagingDirectory
 - task: CopyFiles@2
   inputs:
-    Contents: '**\MLPlayground.AzureDeploy\**'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    Contents: '**\AzureDeploy\**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)\AzureDeploy'
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
-    projects: '**/*.csproj'
+    projects: '**/MLPlayground.Database.csproj'
+    arguments: '--output $(Build.ArtifactStagingDirectory)'
 - task: DotNetCoreCLI@2
   inputs:
     command: 'publish'
