@@ -17,13 +17,33 @@
         },
         "sqlAdminPassword": {
             "type": "securestring"
+        },
+        "tier": {
+            "type": "string",
+            "defaultValue": "GeneralPurpose"
+        },
+        "skuName": {
+            "type": "string",
+            "defaultValue": "GP_S_Gen5_2"
+        },
+        "maxSizeBytes": {
+            "type": "int",
+            "defaultValue": 10737418240
+        },
+        "minCapacity": {
+            "type": "string",
+            "defaultValue": "0.5"
+        },
+        "autoPauseDelay": {
+            "type": "string",
+            "defaultValue": "60"
         }
     },
     "functions": [],
     "variables": {
         "projectName": "mlplayground",
         "sqlservername": "[concat('sqls-',variables('projectName'),'-',parameters('environment'))]",
-        "resourceGroupName": "[concat('rg-',variables('projectName'),'-',parameters('environment'))]"
+        "collation": "SQL_Latin1_General_CP1_CI_AS"
     },
     "resources": [
         {
@@ -53,6 +73,25 @@
                         "startIpAddress": "0.0.0.0",
                         "endIpAddress": "0.0.0.0"
                     }
+                },
+                {
+                    "type": "databases",
+                    "apiVersion": "2020-08-01-preview",
+                    "name": "[variables('projectName')]",
+                    "location": "[resourceGroup().location]",
+                    "properties": {
+                        "collation": "[variables('collation')]",
+                        "maxSizeBytes": "[parameters('maxSizeBytes')]",
+                        "minCapacity": "[parameters('minCapacity')]",
+                        "autoPauseDelay": "[parameters('autoPauseDelay')]"
+                    },
+                    "sku": {
+                        "name": "[parameters('skuName')]",
+                        "tier": "[parameters('tier')]"
+                    },
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Sql/servers', variables('sqlservername'))]"
+                    ]
                 }
             ]
         }
