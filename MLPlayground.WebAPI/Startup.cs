@@ -30,7 +30,7 @@ namespace MLPlayground.WebAPI
         {
 
             services.AddControllers();
-            services.RegisterWebApiServices(_env.EnvironmentName);
+            services.RegisterWebApiServices();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MLPlayground.WebAPI", Version = "v1" });
