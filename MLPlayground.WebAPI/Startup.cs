@@ -18,19 +18,19 @@ namespace MLPlayground.WebAPI
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+        private IWebHostEnvironment _env;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
 
             services.AddControllers();
-            services.RegisterWebApiServices();
+            services.RegisterWebApiServices(_env.EnvironmentName);
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MLPlayground.WebAPI", Version = "v1" });
@@ -40,7 +40,9 @@ namespace MLPlayground.WebAPI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
+            _env = env;
+
+            if (env.IsDevelopment() || env.EnvironmentName.Equals("Local"))
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();

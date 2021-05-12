@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MLPlayground.Models\MLPlayground.Models.csproj" />
+    <ProjectReference Include="..\MLPlayground.DataAccess\MLPlayground.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>
