@@ -24,12 +24,12 @@ namespace MLPlayground.WebAPI.Controllers
 
         [HttpPost]
         [ActionName("LoadImages")]
-        public async Task<HttpResponseMessage> LoadImagesLocally()
+        public async Task<IActionResult> LoadImagesLocally()
         {
             var result = await _imageLoadService.LoadImages();
 
-            if(result) return new HttpResponseMessage(HttpStatusCode.OK);
-            return new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            if(result) return Ok();
+            return Problem();
         }
     }
 }
