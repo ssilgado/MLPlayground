@@ -20,23 +20,15 @@
         },
         "tier": {
             "type": "string",
-            "defaultValue": "GeneralPurpose"
+            "defaultValue": "Basic"
         },
         "skuName": {
             "type": "string",
-            "defaultValue": "GP_S_Gen5_2"
+            "defaultValue": "Basic"
         },
         "maxSizeBytes": {
             "type": "int",
-            "defaultValue": 10737418240
-        },
-        "minCapacity": {
-            "type": "string",
-            "defaultValue": "0.5"
-        },
-        "autoPauseDelay": {
-            "type": "string",
-            "defaultValue": "60"
+            "defaultValue": 2147483648
         }
     },
     "functions": [],
@@ -81,9 +73,7 @@
                     "location": "[resourceGroup().location]",
                     "properties": {
                         "collation": "[variables('collation')]",
-                        "maxSizeBytes": "[parameters('maxSizeBytes')]",
-                        "minCapacity": "[parameters('minCapacity')]",
-                        "autoPauseDelay": "[parameters('autoPauseDelay')]"
+                        "maxSizeBytes": "[parameters('maxSizeBytes')]"
                     },
                     "sku": {
                         "name": "[parameters('skuName')]",
