@@ -9,7 +9,7 @@
                 "prd"
             ],
             "metadata": {
-                "description": "The parameter environment."
+                "description": "The environment parameter."
             }
         },
         "sqlAdminUser": {
@@ -34,17 +34,18 @@
     "functions": [],
     "variables": {
         "projectName": "mlplayground",
-        "sqlservername": "[concat('sqls-',variables('projectName'),'-',parameters('environment'))]",
+        "sqlServerName": "[concat('sqls-',variables('projectName'),'-',parameters('environment'))]",
+        "machineLearningDatabase": "[concat('sqldb-', variables('projectName'), '-', parameters('environment'))]",
         "collation": "SQL_Latin1_General_CP1_CI_AS"
     },
     "resources": [
         {
-            "name": "[variables('sqlservername')]",
+            "name": "[variables('sqlServerName')]",
             "type": "Microsoft.Sql/servers",
             "apiVersion": "2014-04-01",
             "location": "[resourceGroup().location]",
             "tags": {
-                "displayName": "[variables('sqlservername')]"
+                "displayName": "[variables('sqlServerName')]"
             },
             "dependsOn": [
             ],
@@ -57,7 +58,7 @@
                     "type": "firewallRules",
                     "apiVersion": "2014-04-01",
                     "dependsOn": [
-                        "[resourceId('Microsoft.Sql/servers', variables('sqlservername'))]"
+                        "[resourceId('Microsoft.Sql/servers', variables('sqlServerName'))]"
                     ],
                     "location": "[resourceGroup().location]",
                     "name": "AllowAllWindowsAzureIps",
@@ -69,7 +70,7 @@
                 {
                     "type": "databases",
                     "apiVersion": "2020-08-01-preview",
-                    "name": "[variables('projectName')]",
+                    "name": "[variables('machineLearningDatabase')]",
                     "location": "[resourceGroup().location]",
                     "properties": {
                         "collation": "[variables('collation')]",
@@ -80,7 +81,7 @@
                         "tier": "[parameters('tier')]"
                     },
                     "dependsOn": [
-                        "[resourceId('Microsoft.Sql/servers', variables('sqlservername'))]"
+                        "[resourceId('Microsoft.Sql/servers', variables('sqlServerName'))]"
                     ]
                 }
             ]
