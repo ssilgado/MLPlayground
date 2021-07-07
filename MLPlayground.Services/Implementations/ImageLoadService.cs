@@ -24,7 +24,7 @@ namespace MLPlayground.Services.Implementations
         {
             try
             {
-                var imageDownloadDataList = parseImageDataFile().ToList();
+                var imageDownloadDataList = ParseImageDataFile().ToList();
                 var imageDownloadDataBatches = imageDownloadDataList.ChunkBy(10);
                 var imageManifest = new List<ImageTrainingData>();
 
@@ -72,7 +72,7 @@ namespace MLPlayground.Services.Implementations
             
         }
 
-        private IEnumerable<ImageDownloadData> parseImageDataFile()
+        private static IEnumerable<ImageDownloadData> ParseImageDataFile()
         {
             var imageData = File.ReadAllLines(DataFiles.ImageDataSourceTsv)
             .Select(line => line.Split('\t'))
@@ -96,7 +96,7 @@ namespace MLPlayground.Services.Implementations
             return imageDownloadData;
         }
 
-        private async Task GenerateImageManifest(IEnumerable<ImageTrainingData> imageTrainingDatas)
+        private static async Task GenerateImageManifest(IEnumerable<ImageTrainingData> imageTrainingDatas)
         {
             await File.WriteAllLinesAsync(Path.Combine(DataFiles.ImagesFolder, $"ImageManifest.tsv"), imageTrainingDatas.Select(o => $"{o.ImageName}\t{o.ImageClassification}"));
         }

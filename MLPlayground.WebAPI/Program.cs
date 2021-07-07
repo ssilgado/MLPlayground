@@ -15,11 +15,9 @@ namespace MLPlayground.WebAPI
             var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
             if(env.Equals("Local")){
-                using (var scope = host.Services.CreateScope())
-                {
-                    var services = scope.ServiceProvider;
-                    DataGenerator.Initialize(services);
-                }
+                using var scope = host.Services.CreateScope();
+                var services = scope.ServiceProvider;
+                DataGenerator.Initialize(services);
             }
 
             host.Run();

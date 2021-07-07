@@ -15,25 +15,23 @@ namespace MLPlayground.DataAccess.Helpers
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
-            using (var context = new MLPlaygroundDbContext(
-                serviceProvider.GetRequiredService<DbContextOptions<MLPlaygroundDbContext>>()))
+            using var context = new MLPlaygroundDbContext(
+                serviceProvider.GetRequiredService<DbContextOptions<MLPlaygroundDbContext>>());
+            // Do Not Need To Seed The Data If It Already Exists
+            if (context.RefStatuses.Any())
             {
-                // Do Not Need To Seed The Data If It Already Exists
-                if (context.RefStatuses.Any())
-                {
-                    return;
-                }
+                return;
+            }
 
-                var defaultStatuses = new List<RefStatus>
+            var defaultStatuses = new List<RefStatus>
                 {
                     new RefStatus {StatusName = "In Progress", RowCreateTs = DateTime.Now, RowMaintenanceTs = DateTime.Now},
                     new RefStatus {StatusName = "Completed", RowCreateTs = DateTime.Now, RowMaintenanceTs = DateTime.Now},
                     new RefStatus {StatusName = "Cancelled", RowCreateTs = DateTime.Now, RowMaintenanceTs = DateTime.Now},
                 };
 
-                context.AddRangeAsync(defaultStatuses);
-                context.SaveChanges();
-            }
+            context.AddRangeAsync(defaultStatuses);
+            context.SaveChanges();
         }
     }
 }

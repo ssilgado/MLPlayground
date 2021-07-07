@@ -1,4 +1,3 @@
-using Microsoft.Extensions.Http;
 using Microsoft.Extensions.DependencyInjection;
 
 using MLPlayground.Services.Contracts;
