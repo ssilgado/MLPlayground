@@ -14,11 +14,14 @@ namespace MLPlayground.DataAccess.Mappings
             builder.HasKey(e => e.ProcessStatusKey)
                 .HasName("pkProcessStatusOnProcessStatusKey");
 
-            builder.Property(e => e.ProcessGuid).HasColumnName("ProcessGUID");
+            builder.Property(e => e.ProcessGuid)
+                .HasColumnName("ProcessGUID");
 
-            builder.Property(e => e.RowCreateTs).HasColumnType("datetime");
+            builder.Property(e => e.RowCreateTs)
+                .HasColumnType("datetime");
 
-            builder.Property(e => e.RowMaintenanceTs).HasColumnType("datetime");
+            builder.Property(e => e.RowMaintenanceTs)
+                .HasColumnType("datetime");
 
             builder.HasOne(d => d.StatusKeyNavigation)
                 .WithMany(p => p.ProcessStatuses)

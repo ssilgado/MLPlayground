@@ -19,6 +19,8 @@ namespace MLPlayground.DataAccess.Implementations
 
         public virtual DbSet<ProcessStatus> ProcessStatuses { get; set; }
         public virtual DbSet<RefStatus> RefStatuses { get; set; }
+        public virtual DbSet<ImageRecord> ImageRecords { get; set; }
+        public virtual DbSet<Image> Images { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
